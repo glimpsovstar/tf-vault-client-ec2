@@ -12,7 +12,8 @@ variable "ami_id" {
 
 variable "instance_type" {
   type = string
-  default = "t2.micro"
+  #default = "t2.micro"
+  default = "t3.small"
 }
 
 variable "aws_key_pair_name" {
