@@ -5,6 +5,7 @@ resource "aws_instance" "rhel9_instance" {
   key_name      = var.aws_key_pair_name
   tags          = var.ec2_tags
   vpc_security_group_ids = [data.terraform_remote_state.aws_dev_vpc.outputs.security-group-id] 
+  user_data    = data.template_file.init.rendered
 }
 
 ## TESTING with aws_ec2_instance_state ####
@@ -21,4 +22,8 @@ resource "aws_ec2_instance_state" "rhel9_instance_state" {
 resource "aws_eip" "instance-eip" {
   instance = aws_instance.rhel9_instance.id
   vpc = true
+}
+
+data "template_file" "init" {
+  template = file("${path.module}/init.tpl")
 }
