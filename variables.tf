@@ -29,6 +29,6 @@ variable "ec2_tags" {
     Environment = "Dev"
     Owner = "djoo"
     Name = "tf-vault-client-ec2-RHEL9"
-    Test_Tag = "test123"
+    Test_Tag = "HSO-demo"
   }
 }
