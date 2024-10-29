@@ -1,10 +1,10 @@
 resource "aws_instance" "rhel9_instance" {
   ami           = var.ami_id
   instance_type = var.instance_type
-  subnet_id     = data.terraform_remote_state.aws_dev_vpc.outputs.vpc_public_subnets
+  subnet_id     = data.terraform_remote_state.aws_dev_vpc.outputs.vpc-subnet-id
   key_name      = var.aws_key_pair_name
   tags          = var.ec2_tags
-  vpc_security_group_ids = [data.terraform_remote_state.aws_dev_vpc.outputs.security_group-ssh_http_https_allowed] 
+  vpc_security_group_ids = [data.terraform_remote_state.aws_dev_vpc.outputs.security-group-id] 
 }
 
 ## TESTING with aws_ec2_instance_state ####
@@ -14,7 +14,7 @@ resource "aws_instance" "rhel9_instance" {
 ###########################################
 
 resource "aws_ec2_instance_state" "rhel9_instance_state" {
-  instance_id = aws_instance.rhel_instance.id
+  instance_id = aws_instance.rhel9_instance.id
   state = "running"
 }
 
